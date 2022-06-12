@@ -1,9 +1,11 @@
 import User from "../models/User";
+import UserUseCase from "../useCases/UserUseCase";
 
 class UserController {
   async store(req, res) {
-    await User.create(req.body);
-    res.json(req.body);
+    const user = req.body;
+    const createdUser = await UserUseCase.createUser(user);
+    res.json(createdUser);
   }
 }
 

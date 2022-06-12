@@ -1,10 +1,31 @@
-import User from "../models/User";
+import jwt from "jsonwebtoken";
+import HttpStatus from "http-status-codes";
+import UserUseCase from "../useCases/UserUseCase";
+import AuthUseCase from "../useCases/AuthUseCase";
 
 class AuthController {
   async login(req, res) {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email, password });
-    res.json(user);
+    const userRequest = req.body;
+    const userFound = await UserUseCase.checkIfUserExists(userRequest);
+
+    if (!userFound) {
+      return res.status(HttpStatus.UNAUTHORIZED).send();
+    }
+
+    if (
+      !AuthUseCase.passwordIsValid(userRequest.password, userFound.password)
+    ) {
+      return res.status(HttpStatus.UNAUTHORIZED).send();
+    }
+
+    const token = jwt.sign({ userId: userFound.id }, process.env.JWT_SECRET);
+
+    return res.json({
+      id: userFound.id,
+      email: userFound.email,
+      name: userFound.name,
+      token,
+    });
   }
 }
 

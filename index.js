@@ -1,4 +1,4 @@
-import server from './src/app.js';
+import server from "./src/app";
 
 const { PORT } = process.env;
 

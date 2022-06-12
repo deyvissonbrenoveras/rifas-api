@@ -1,17 +1,19 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../../database";
 
-class Raffles extends Model {}
+class Raffle extends Model {}
 
-Raffles.init(
+Raffle.init(
   {
     title: DataTypes.STRING,
     description: DataTypes.STRING,
     quotaExpirationDate: DataTypes.DATE,
     quotaPrice: DataTypes.DOUBLE,
     status: DataTypes.STRING,
+    categoryId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER,
   },
   { sequelize, tableName: "raffles" }
 );
 
-export default Raffles;
+export default Raffle;

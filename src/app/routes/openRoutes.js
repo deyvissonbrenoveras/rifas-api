@@ -5,7 +5,7 @@ import asyncHandler from "express-async-handler";
 
 const openRoutes = Router();
 
-openRoutes.post("/user", asyncHandler(UserController.store));
+openRoutes.post("/users", asyncHandler(UserController.store));
 openRoutes.post("/auth", asyncHandler(AuthController.login));
 
 export default openRoutes;

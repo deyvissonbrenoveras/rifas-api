@@ -19,15 +19,15 @@ module.exports = {
       },
       quotaExpirationDate: {
         type: Sequelize.DATE,
-        allowNull: true,
+        allowNull: false,
       },
       quotaPrice: {
         type: Sequelize.DOUBLE,
-        allowNull: true,
+        allowNull: false,
       },
       status: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       category: {
         type: Sequelize.INTEGER,

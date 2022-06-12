@@ -25,17 +25,13 @@ module.exports = {
       },
       buyerId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: "buyers",
           key: "id",
           onUpdate: "CASCADE",
           onDelete: "SET NULL",
         },
-      },
-      reservationDate: {
-        type: Sequelize.DATE,
-        allowNull: false,
       },
       payDate: {
         type: Sequelize.DATE,

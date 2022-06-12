@@ -13,7 +13,10 @@ class AuthController {
     }
 
     if (
-      !AuthUseCase.passwordIsValid(userRequest.password, userFound.password)
+      !(await AuthUseCase.passwordIsValid(
+        userRequest.password,
+        userFound.password
+      ))
     ) {
       return res.status(HttpStatus.UNAUTHORIZED).send();
     }

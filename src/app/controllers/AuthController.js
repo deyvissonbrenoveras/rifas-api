@@ -1,4 +1,3 @@
-import jwt from "jsonwebtoken";
 import HttpStatus from "http-status-codes";
 import UserUseCase from "../useCases/UserUseCase";
 import AuthUseCase from "../useCases/AuthUseCase";
@@ -21,7 +20,7 @@ class AuthController {
       return res.status(HttpStatus.UNAUTHORIZED).send();
     }
 
-    const token = jwt.sign({ userId: userFound.id }, process.env.JWT_SECRET);
+    const token = await AuthUseCase.signToken({ userId: userFound.id });
 
     return res.json({
       id: userFound.id,

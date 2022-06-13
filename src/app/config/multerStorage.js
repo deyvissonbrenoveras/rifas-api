@@ -3,7 +3,7 @@ import crypto from "crypto";
 
 export default multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "tmpUploads/");
+    cb(null, "tmp/");
   },
   filename: function (req, file, cb) {
     const fileExt = file.originalname.split(".")[1];

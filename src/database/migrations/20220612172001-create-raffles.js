@@ -21,6 +21,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
+      quotaQuantity: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       quotaPrice: {
         type: Sequelize.DOUBLE,
         allowNull: false,

@@ -6,6 +6,11 @@ class RaffleUseCase {
     const raffle = await Raffle.findByPk(raffleId);
     return raffle && raffle.userId == userId;
   }
+  async findInProgressRaffleById(raffleId) {
+    return await Raffle.findOne({
+      where: { id: raffleId, status: RaffleStatusEnum.IN_PROGRESS },
+    });
+  }
   async createRaffle(raffle, userId, transaction) {
     raffle.userId = userId;
     raffle.status = RaffleStatusEnum.WAITING_FOR_PAYMENT;

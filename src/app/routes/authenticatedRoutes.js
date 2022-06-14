@@ -1,4 +1,5 @@
 import { Router } from "express";
+import asyncHandler from "express-async-handler";
 
 import multer from "multer";
 import auth from "../middlewares/auth";
@@ -16,11 +17,11 @@ const authenticatedRoutes = Router();
 
 authenticatedRoutes.use(auth);
 
-authenticatedRoutes.post("/raffles", RaffleController.store);
+authenticatedRoutes.post("/raffles", asyncHandler(RaffleController.store));
 authenticatedRoutes.post(
   "/images",
   upload.single("image", maxImages),
-  ImageController.store
+  asyncHandler(ImageController.store)
 );
 
 export default authenticatedRoutes;

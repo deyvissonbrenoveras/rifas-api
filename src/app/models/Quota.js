@@ -7,8 +7,9 @@ Quota.init(
   {
     number: DataTypes.STRING,
     raffleId: DataTypes.INTEGER,
-    buyerId: DataTypes.DATE,
-    payDate: DataTypes.DATE,
+    buyerId: DataTypes.INTEGER,
+    reservationDate: DataTypes.DATE,
+    paid: DataTypes.BOOLEAN,
   },
   { sequelize, tableName: "quotas" }
 );

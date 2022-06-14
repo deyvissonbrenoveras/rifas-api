@@ -33,9 +33,14 @@ module.exports = {
           onDelete: "SET NULL",
         },
       },
-      payDate: {
+      reservationDate: {
         type: Sequelize.DATE,
         allowNull: true,
+      },
+      paid: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
+        default: false,
       },
       createdAt: {
         type: Sequelize.DATE,

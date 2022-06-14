@@ -13,6 +13,9 @@ Raffle.init(
     status: DataTypes.STRING,
     categoryId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER,
+    firstImageId: DataTypes.INTEGER,
+    secondImageId: DataTypes.INTEGER,
+    thirdImageId: DataTypes.INTEGER,
   },
   { sequelize, tableName: "raffles" }
 );

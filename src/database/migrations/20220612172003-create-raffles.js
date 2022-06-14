@@ -53,6 +53,36 @@ module.exports = {
           onDelete: "SET NULL",
         },
       },
+      firstImageId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: "images",
+          key: "id",
+          onUpdate: "CASCADE",
+          onDelete: "SET NULL",
+        },
+      },
+      secondImageId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: "images",
+          key: "id",
+          onUpdate: "CASCADE",
+          onDelete: "SET NULL",
+        },
+      },
+      thirdImageId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: "images",
+          key: "id",
+          onUpdate: "CASCADE",
+          onDelete: "SET NULL",
+        },
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,

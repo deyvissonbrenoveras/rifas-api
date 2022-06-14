@@ -1,5 +1,6 @@
 import sharp from "sharp";
 import { resolve } from "path";
+import Image from "../models/Image";
 import fs from "fs";
 
 class ImageUseCase {
@@ -16,8 +17,8 @@ class ImageUseCase {
     fs.unlinkSync(filePath);
     return newPath;
   }
-  async uploadToS3(filePath) {
-    console.log(filePath);
+  async createImage(filename) {
+    return await Image.create({ filename });
   }
 }
 

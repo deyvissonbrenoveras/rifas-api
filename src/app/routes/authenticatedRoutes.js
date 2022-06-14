@@ -19,7 +19,7 @@ authenticatedRoutes.use(auth);
 authenticatedRoutes.post("/raffles", RaffleController.store);
 authenticatedRoutes.post(
   "/images",
-  upload.array("images", maxImages),
+  upload.single("image", maxImages),
   ImageController.store
 );
 

@@ -1,12 +1,12 @@
+import HttpStatus from "http-status-codes";
 import ImageUseCase from "../useCases/ImageUseCase";
+import RaffleUseCase from "../useCases/RaffleUseCase";
 
 class ImageController {
-  store(req, res) {
-    req.files.forEach(async (file) => {
-      const newPath = await ImageUseCase.compressFile(file);
-      ImageUseCase.uploadToS3(newPath);
-    });
-    return res.send();
+  async store(req, res) {
+    const { filename } = req.file;
+    const image = await ImageUseCase.createImage(filename);
+    return res.json(image);
   }
 }
 

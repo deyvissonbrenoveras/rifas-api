@@ -5,4 +5,5 @@ export default Yup.object({
   email: Yup.string().email().required(),
   phone: Yup.string().required(),
   raffleId: Yup.number().positive().required(),
+  quotas: Yup.array().of(Yup.number().required()).required(),
 });

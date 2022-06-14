@@ -29,6 +29,10 @@ module.exports = {
         type: Sequelize.DOUBLE,
         allowNull: false,
       },
+      allowedQuotasPerPurchase: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
       status: {
         type: Sequelize.STRING,
         allowNull: false,

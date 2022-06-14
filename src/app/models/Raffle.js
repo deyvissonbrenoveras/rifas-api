@@ -10,6 +10,7 @@ Raffle.init(
     quotaQuantity: DataTypes.INTEGER,
     quotaExpirationDate: DataTypes.DATE,
     quotaPrice: DataTypes.DOUBLE,
+    allowedQuotasPerPurchase: DataTypes.INTEGER,
     status: DataTypes.STRING,
     categoryId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER,

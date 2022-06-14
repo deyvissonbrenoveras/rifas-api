@@ -9,11 +9,24 @@ class BuyerController {
     const validRaffle = await RaffleUseCase.findInProgressRaffleById(
       buyer.raffleId
     );
+
     if (!validRaffle) {
       return res.status(HttpStatus.BAD_REQUEST).json({
         message: "The informed raffle is not active or doesn't exist",
       });
     }
+
+    if (
+      validRaffle.allowedQuotasPerPurchase &&
+      validRaffle.allowedQuotasPerPurchase < buyer.quotas.length
+    ) {
+      return res.status(HttpStatus.BAD_REQUEST).json({
+        message:
+          "Buyer exceeded the quota limit per purchase in this raffle: " +
+          validRaffle.allowedQuotasPerPurchase,
+      });
+    }
+
     const createdBuyer = await BuyerUseCase.createBuyer(buyer);
     return res.json(createdBuyer);
   }

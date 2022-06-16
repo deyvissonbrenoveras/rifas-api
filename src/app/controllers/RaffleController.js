@@ -2,11 +2,14 @@ import sequelize from "../../database";
 import RaffleUseCase from "../useCases/RaffleUseCase";
 import HttpStatus from "http-status-codes";
 import QuotaUseCase from "../useCases/QuotaUseCase";
+import RaffleSchema from "../validations/RaffleSchema";
 
 class RaffleController {
   async store(req, res) {
     const raffle = req.body;
     const { userId } = req;
+    await RaffleSchema.validateSync(raffle);
+
     try {
       await sequelize.transaction(async (transaction) => {
         const createdRaffle = await RaffleUseCase.createRaffle(

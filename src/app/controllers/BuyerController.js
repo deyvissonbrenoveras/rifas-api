@@ -1,11 +1,14 @@
 import BuyerUseCase from "../useCases/BuyerUseCase";
 import RaffleUseCase from "../useCases/RaffleUseCase";
 import HttpStatus from "http-status-codes";
-import Quota from "../models/Quota";
 import QuotaUseCase from "../useCases/QuotaUseCase";
+import BuyerSchema from "../validations/BuyerSchema";
+
 class BuyerController {
   async store(req, res) {
     const buyer = req.body;
+
+    await BuyerSchema.validateSync(buyer);
 
     const validRaffle = await RaffleUseCase.findInProgressRaffleById(
       buyer.raffleId
@@ -28,12 +31,12 @@ class BuyerController {
       });
     }
 
-    const quotasNotAvailable = await QuotaUseCase.searchNotAvailableQuotas(
+    const quotasAvailableCount = await QuotaUseCase.countAvailableQuotas(
       buyer.raffleId,
       buyer.quotas
     );
 
-    if (quotasNotAvailable.length > 0) {
+    if (quotasAvailableCount != buyer.quotas.length) {
       return res.status(HttpStatus.CONFLICT).json({
         message: "Some of informed quotas is not available",
       });

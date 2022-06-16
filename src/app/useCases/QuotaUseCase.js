@@ -14,12 +14,13 @@ class QuotaUseCase {
 
     return await Quota.bulkCreate(quotaList, { transaction });
   }
-  async searchNotAvailableQuotas(raffleId, quotasArray) {
-    return await Quota.findAll({
+
+  async countAvailableQuotas(raffleId, quotasArray) {
+    return await Quota.count({
       where: {
         raffleId,
         number: quotasArray,
-        buyerId: { [Op.not]: null },
+        buyerId: { [Op.is]: null },
       },
     });
   }

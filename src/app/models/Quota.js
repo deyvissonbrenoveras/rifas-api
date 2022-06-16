@@ -7,7 +7,7 @@ Quota.init(
   {
     number: DataTypes.STRING,
     raffleId: DataTypes.INTEGER,
-    buyerId: DataTypes.INTEGER,
+    orderId: DataTypes.INTEGER,
     reservationDate: DataTypes.DATE,
     paid: DataTypes.BOOLEAN,
   },

@@ -23,11 +23,11 @@ module.exports = {
           onDelete: "SET NULL",
         },
       },
-      buyerId: {
+      orderId: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
-          model: "buyers",
+          model: "orders",
           key: "id",
           onUpdate: "CASCADE",
           onDelete: "SET NULL",

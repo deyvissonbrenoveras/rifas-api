@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 
 import AuthController from "../controllers/AuthController";
 import UserController from "../controllers/UserController";
-import BuyerController from "../controllers/BuyerController";
+import OrderController from "../controllers/OrderController";
 
 const openRoutes = Router();
 
@@ -17,7 +17,7 @@ openRoutes.use(
   "/images",
   express.static(path.join(__dirname, "..", "..", "..", "tmp"))
 );
-openRoutes.post("/buyers", asyncHandler(BuyerController.store));
+openRoutes.post("/orders", asyncHandler(OrderController.store));
 openRoutes.post("/users", asyncHandler(UserController.store));
 openRoutes.post("/auth", asyncHandler(AuthController.login));
 

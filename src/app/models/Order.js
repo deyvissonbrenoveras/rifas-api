@@ -1,16 +1,16 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../../database";
 
-class Buyer extends Model {}
+class Order extends Model {}
 
-Buyer.init(
+Order.init(
   {
     name: DataTypes.STRING,
     phone: DataTypes.STRING,
     email: DataTypes.STRING,
     raffleId: DataTypes.INTEGER,
   },
-  { sequelize, tableName: "buyers" }
+  { sequelize, tableName: "orders" }
 );
 
-export default Buyer;
+export default Order;

@@ -20,13 +20,13 @@ class QuotaUseCase {
       where: {
         raffleId,
         number: quotasArray,
-        buyerId: { [Op.is]: null },
+        orderId: { [Op.is]: null },
       },
     });
   }
-  async updateQuotasBuyerId(raffleId, quotasArray, buyerId, reservationDate) {
+  async updateQuotasOrderId(raffleId, quotasArray, orderId, reservationDate) {
     await Quota.update(
-      { buyerId, reservationDate },
+      { orderId, reservationDate },
       { where: { raffleId, number: quotasArray } }
     );
   }

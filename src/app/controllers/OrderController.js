@@ -1,17 +1,17 @@
-import BuyerUseCase from "../useCases/BuyerUseCase";
+import OrderUseCase from "../useCases/OrderUseCase";
 import RaffleUseCase from "../useCases/RaffleUseCase";
 import HttpStatus from "http-status-codes";
 import QuotaUseCase from "../useCases/QuotaUseCase";
-import BuyerSchema from "../validations/BuyerSchema";
+import OrderSchema from "../validations/OrderSchema";
 
-class BuyerController {
+class OrderController {
   async store(req, res) {
-    const buyer = req.body;
+    const order = req.body;
 
-    await BuyerSchema.validateSync(buyer);
+    await OrderSchema.validateSync(order);
 
     const validRaffle = await RaffleUseCase.findInProgressRaffleById(
-      buyer.raffleId
+      order.raffleId
     );
 
     if (!validRaffle) {
@@ -22,37 +22,37 @@ class BuyerController {
 
     if (
       validRaffle.allowedQuotasPerPurchase &&
-      validRaffle.allowedQuotasPerPurchase < buyer.quotas.length
+      validRaffle.allowedQuotasPerPurchase < order.quotas.length
     ) {
       return res.status(HttpStatus.BAD_REQUEST).json({
         message:
-          "Buyer exceeded the quota limit per purchase in this raffle: " +
+          "Order exceeded the quota limit per purchase in this raffle: " +
           validRaffle.allowedQuotasPerPurchase,
       });
     }
 
     const quotasAvailableCount = await QuotaUseCase.countAvailableQuotas(
-      buyer.raffleId,
-      buyer.quotas
+      order.raffleId,
+      order.quotas
     );
 
-    if (quotasAvailableCount != buyer.quotas.length) {
+    if (quotasAvailableCount != order.quotas.length) {
       return res.status(HttpStatus.CONFLICT).json({
         message: "Some of informed quotas is not available",
       });
     }
 
-    const createdBuyer = await BuyerUseCase.createBuyer(buyer);
+    const createdOrder = await OrderUseCase.createOrder(order);
 
-    await QuotaUseCase.updateQuotasBuyerId(
-      buyer.raffleId,
-      buyer.quotas,
-      createdBuyer.id,
+    await QuotaUseCase.updateQuotasOrderId(
+      order.raffleId,
+      order.quotas,
+      createdOrder.id,
       Date.now()
     );
 
-    return res.json(createdBuyer);
+    return res.json(createdOrder);
   }
 }
 
-export default new BuyerController();
+export default new OrderController();

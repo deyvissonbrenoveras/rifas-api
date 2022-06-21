@@ -1,6 +1,7 @@
 import RaffleStatusEnum from "../enums/RaffleStatusEnum";
 import Raffle from "../models/Raffle";
 import Image from "../models/Image";
+import Quota from "../models/Quota";
 
 class RaffleUseCase {
   raffleAttributes = [
@@ -20,6 +21,11 @@ class RaffleUseCase {
     { model: Image, as: "firstImage", attributes: this.imageAttributes },
     { model: Image, as: "secondImage", attributes: this.imageAttributes },
     { model: Image, as: "thirdImage", attributes: this.imageAttributes },
+    {
+      model: Quota,
+      as: "quotas",
+      attributes: ["id", "number", "reservationDate", "paid"],
+    },
   ];
 
   async raffleBelongsToUser(raffleId, userId) {

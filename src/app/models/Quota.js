@@ -14,6 +14,11 @@ class Quota extends Model {
     );
     return this;
   }
+  static associate(models) {
+    this.belongsTo(models.Raffle, {
+      foreignKey: "raffleId",
+    });
+  }
 }
 
 export default Quota;

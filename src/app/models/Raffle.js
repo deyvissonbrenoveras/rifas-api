@@ -34,6 +34,10 @@ class Raffle extends Model {
       foreignKey: "thirdImageId",
       as: "thirdImage",
     });
+    this.hasMany(models.Quota, {
+      foreignKey: "raffleId",
+      as: "quotas",
+    });
   }
 }
 

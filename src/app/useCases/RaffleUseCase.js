@@ -1,5 +1,6 @@
 import RaffleStatusEnum from "../enums/RaffleStatusEnum";
 import Raffle from "../models/Raffle";
+import Image from "../models/Image";
 
 class RaffleUseCase {
   async raffleBelongsToUser(raffleId, userId) {
@@ -15,6 +16,28 @@ class RaffleUseCase {
     raffle.userId = userId;
     raffle.status = RaffleStatusEnum.WAITING_FOR_PAYMENT;
     return await Raffle.create(raffle, { transaction });
+  }
+  async findAllByUserId(userId) {
+    const imageAttributes = ["url", "filename"];
+
+    return await Raffle.findAll({
+      where: { userId },
+      attributes: [
+        "id",
+        "title",
+        "description",
+        "quotaQuantity",
+        "quotaExpirationDate",
+        "quotaPrice",
+        "allowedQuotasPerPurchase",
+        "status",
+      ],
+      include: [
+        { model: Image, as: "firstImage", attributes: imageAttributes },
+        { model: Image, as: "secondImage", attributes: imageAttributes },
+        { model: Image, as: "thirdImage", attributes: imageAttributes },
+      ],
+    });
   }
 }
 

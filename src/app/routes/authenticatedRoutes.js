@@ -16,15 +16,21 @@ const upload = multer({
 
 const authenticatedRoutes = Router();
 
+// AUTHENTICATION
 authenticatedRoutes.use(auth);
 
+// IMAGES
 authenticatedRoutes.post(
   "/images",
   upload.single("image", maxImages),
   asyncHandler(ImageController.store)
 );
 
+// RAFFLEs
+authenticatedRoutes.get("/raffles", asyncHandler(RaffleController.show));
 authenticatedRoutes.post("/raffles", asyncHandler(RaffleController.store));
+
+//PRIZES
 authenticatedRoutes.post("/prizes", asyncHandler(PrizeController.store));
 
 export default authenticatedRoutes;

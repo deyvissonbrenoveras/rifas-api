@@ -5,6 +5,11 @@ import QuotaUseCase from "../useCases/QuotaUseCase";
 import RaffleSchema from "../validations/RaffleSchema";
 
 class RaffleController {
+  async show(req, res) {
+    const { userId } = req;
+    return res.json(await RaffleUseCase.findAllByUserId(userId));
+  }
+
   async store(req, res) {
     const raffle = req.body;
     const { userId } = req;

@@ -5,6 +5,18 @@ import QuotaUseCase from "../useCases/QuotaUseCase";
 import RaffleSchema from "../validations/RaffleSchema";
 
 class RaffleController {
+  async index(req, res) {
+    const { id } = req.params;
+
+    const foundRaffle = await RaffleUseCase.findByPk(id);
+    if (!foundRaffle) {
+      return res
+        .status(HttpStatus.BAD_REQUEST)
+        .json({ message: `Raffle with id ${id} not found` });
+    }
+    return res.json(foundRaffle);
+  }
+
   async show(req, res) {
     const { userId } = req;
     return res.json(await RaffleUseCase.findAllByUserId(userId));

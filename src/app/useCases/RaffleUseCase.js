@@ -13,9 +13,13 @@ class RaffleUseCase {
     "quotaPrice",
     "allowedQuotasPerPurchase",
     "status",
+    "firstImageId",
+    "secondImageId",
+    "thirdImageId",
+    "categoryId",
   ];
 
-  imageAttributes = ["url", "filename"];
+  imageAttributes = ["url", "filename", "id"];
 
   raffleIncludes = [
     { model: Image, as: "firstImage", attributes: this.imageAttributes },

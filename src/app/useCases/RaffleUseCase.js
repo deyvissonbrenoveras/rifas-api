@@ -28,7 +28,7 @@ class RaffleUseCase {
     {
       model: Quota,
       as: "quotas",
-      attributes: ["id", "number", "reservationDate", "paid"],
+      attributes: ["id", "number", "reservationDate", "paid", "available"],
     },
   ];
 
@@ -51,6 +51,7 @@ class RaffleUseCase {
     return await Raffle.findByPk(raffleId, {
       attributes: this.raffleAttributes,
       include: this.raffleIncludes,
+      order: [["quotas", "number", "ASC"]],
     });
   }
   async createRaffle(raffle, userId, transaction) {

@@ -9,6 +9,12 @@ class Quota extends Model {
         orderId: DataTypes.INTEGER,
         reservationDate: DataTypes.DATE,
         paid: DataTypes.BOOLEAN,
+        available: {
+          type: DataTypes.VIRTUAL,
+          get() {
+            return !this.paid;
+          },
+        },
       },
       { sequelize, tableName: "quotas" }
     );

@@ -37,8 +37,14 @@ class RaffleUseCase {
     return raffle && raffle.userId == userId;
   }
   async findInProgressRaffleById(raffleId) {
+    // TODO Validation disabled for development
+    //
+    // return await Raffle.findOne({
+    //   where: { id: raffleId, status: RaffleStatusEnum.IN_PROGRESS },
+    // });
+
     return await Raffle.findOne({
-      where: { id: raffleId, status: RaffleStatusEnum.IN_PROGRESS },
+      where: { id: raffleId },
     });
   }
   async findByPk(raffleId) {

@@ -7,7 +7,7 @@ class Raffle extends Model {
         title: DataTypes.STRING,
         description: DataTypes.STRING,
         quotaQuantity: DataTypes.INTEGER,
-        quotaExpirationDate: DataTypes.DATE,
+        quotaExpirationInDays: DataTypes.INTEGER,
         quotaPrice: DataTypes.DOUBLE,
         allowedQuotasPerPurchase: DataTypes.INTEGER,
         status: DataTypes.STRING,

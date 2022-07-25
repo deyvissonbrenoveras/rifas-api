@@ -9,7 +9,7 @@ class RaffleUseCase {
     "title",
     "description",
     "quotaQuantity",
-    "quotaExpirationDate",
+    "quotaExpirationInDays",
     "quotaPrice",
     "allowedQuotasPerPurchase",
     "status",

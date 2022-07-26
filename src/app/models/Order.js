@@ -8,6 +8,8 @@ class Order extends Model {
         phone: DataTypes.STRING,
         email: DataTypes.STRING,
         raffleId: DataTypes.INTEGER,
+        paid: DataTypes.BOOLEAN,
+        reservationExpiration: DataTypes.DATE,
       },
       { sequelize, tableName: "orders" }
     );

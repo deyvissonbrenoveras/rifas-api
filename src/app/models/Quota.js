@@ -7,12 +7,10 @@ class Quota extends Model {
         number: DataTypes.STRING,
         raffleId: DataTypes.INTEGER,
         orderId: DataTypes.INTEGER,
-        reservationDate: DataTypes.DATE,
-        paid: DataTypes.BOOLEAN,
         available: {
           type: DataTypes.VIRTUAL,
           get() {
-            return !this.paid;
+            return true;
           },
         },
       },
@@ -23,6 +21,10 @@ class Quota extends Model {
   static associate(models) {
     this.belongsTo(models.Raffle, {
       foreignKey: "raffleId",
+    });
+    this.belongsTo(models.Order, {
+      foreignKey: "orderId",
+      as: "order",
     });
   }
 }

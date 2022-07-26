@@ -40,7 +40,7 @@ module.exports = {
       paid: {
         type: Sequelize.BOOLEAN,
         allowNull: true,
-        default: false,
+        defaultValue: false,
       },
       createdAt: {
         type: Sequelize.DATE,

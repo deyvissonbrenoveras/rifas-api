@@ -42,13 +42,21 @@ class OrderController {
       });
     }
 
-    const createdOrder = await OrderUseCase.createOrder(order);
+    const reservationExpiration = new Date();
+
+    reservationExpiration.setDate(
+      reservationExpiration.getDate() + validRaffle.quotaExpirationInDays
+    );
+
+    const createdOrder = await OrderUseCase.createOrder({
+      ...order,
+      reservationExpiration,
+    });
 
     await QuotaUseCase.updateQuotasOrderId(
       order.raffleId,
       order.quotas,
-      createdOrder.id,
-      Date.now()
+      createdOrder.id
     );
 
     return res.json(createdOrder);

@@ -2,6 +2,7 @@ import RaffleStatusEnum from "../enums/RaffleStatusEnum";
 import Raffle from "../models/Raffle";
 import Image from "../models/Image";
 import Quota from "../models/Quota";
+import Order from "../models/Order";
 
 class RaffleUseCase {
   raffleAttributes = [
@@ -28,7 +29,8 @@ class RaffleUseCase {
     {
       model: Quota,
       as: "quotas",
-      attributes: ["id", "number", "reservationDate", "paid", "available"],
+      attributes: ["id", "number", "available"],
+      include: { model: Order, as: "order", attributes: ["id", "paid"] },
     },
   ];
 

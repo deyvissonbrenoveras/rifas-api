@@ -24,9 +24,9 @@ class QuotaUseCase {
       },
     });
   }
-  async updateQuotasOrderId(raffleId, quotasArray, orderId, reservationDate) {
+  async updateQuotasOrderId(raffleId, quotasArray, orderId) {
     await Quota.update(
-      { orderId, reservationDate },
+      { orderId },
       { where: { raffleId, number: quotasArray } }
     );
   }

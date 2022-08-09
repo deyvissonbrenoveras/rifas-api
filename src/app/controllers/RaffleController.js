@@ -48,6 +48,27 @@ class RaffleController {
       return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message });
     }
   }
+
+  async update(req, res) {
+    const raffle = req.body;
+    const { id } = req.params;
+    const { userId } = req;
+
+    const validRaffle = await RaffleUseCase.findInProgressRaffleById(id);
+    if (!validRaffle) {
+      return res.status(HttpStatus.BAD_REQUEST).json({
+        message: "The informed raffle is not active or doesn't exist",
+      });
+    } else if (validRaffle.userId !== userId) {
+      return res.status(HttpStatus.FORBIDDEN).json({
+        message: "You don't have entitlements to update this raffle",
+      });
+    }
+
+    const updatedRaffle = await RaffleUseCase.updateRaffle(id, raffle);
+
+    return res.json(updatedRaffle);
+  }
 }
 
 export default new RaffleController();

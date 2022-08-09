@@ -29,6 +29,7 @@ authenticatedRoutes.post(
 // RAFFLEs
 authenticatedRoutes.get("/raffles", asyncHandler(RaffleController.show));
 authenticatedRoutes.post("/raffles", asyncHandler(RaffleController.store));
+authenticatedRoutes.put("/raffles/:id", asyncHandler(RaffleController.update));
 
 //PRIZES
 authenticatedRoutes.post("/prizes", asyncHandler(PrizeController.store));

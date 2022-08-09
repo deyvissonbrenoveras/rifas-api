@@ -68,6 +68,19 @@ class RaffleUseCase {
       include: this.raffleIncludes,
     });
   }
+  async updateRaffle(id, raffle) {
+    const raffleToUpdate = await Raffle.findByPk(id);
+    raffleToUpdate.title = raffle.title;
+    raffleToUpdate.description = raffle.description;
+    raffleToUpdate.quotaPrice = raffle.quotaPrice;
+    raffleToUpdate.allowedQuotasPerPurchase = raffle.allowedQuotasPerPurchase;
+    raffleToUpdate.firstImageId = raffle.firstImageId;
+    raffleToUpdate.secondImageId = raffle.secondImageId;
+    raffleToUpdate.thirdImageId = raffle.thirdImageId;
+    raffleToUpdate.categoryId = raffle.categoryId;
+    raffleToUpdate.save();
+    return raffleToUpdate;
+  }
 }
 
 export default new RaffleUseCase();

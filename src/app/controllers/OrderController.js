@@ -61,6 +61,24 @@ class OrderController {
 
     return res.json(createdOrder);
   }
+  async showByRaffleId(req, res) {
+    const { id: raffleId } = req.params;
+    const { userId } = req;
+    if (!(await RaffleUseCase.raffleBelongsToUser(raffleId, userId))) {
+      return res.status(HttpStatus.FORBIDDEN).json({
+        message:
+          "The informed raffle doesn't exist or you don't have entitlements to view",
+      });
+    }
+    const orders = await OrderUseCase.getOrdersByRaffleId(raffleId);
+    return res.json(orders);
+  }
+  async markAsPaidById(req, res) {
+    const { id: orderId } = req.params;
+    const order = await OrderUseCase.getOrderById(orderId);
+
+    return res.json(order);
+  }
 }
 
 export default new OrderController();

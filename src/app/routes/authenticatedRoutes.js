@@ -9,6 +9,7 @@ import RaffleController from "../controllers/RaffleController";
 import PrizeController from "../controllers/PrizeController";
 
 import multerStorage from "../config/multerStorage";
+import OrderController from "../controllers/OrderController";
 const maxImages = 3;
 const upload = multer({
   storage: multerStorage,
@@ -31,7 +32,17 @@ authenticatedRoutes.get("/raffles", asyncHandler(RaffleController.show));
 authenticatedRoutes.post("/raffles", asyncHandler(RaffleController.store));
 authenticatedRoutes.put("/raffles/:id", asyncHandler(RaffleController.update));
 
-//PRIZES
+// PRIZES
 authenticatedRoutes.post("/prizes", asyncHandler(PrizeController.store));
+
+// ORDERS
+authenticatedRoutes.get(
+  "/raffles/:id/orders",
+  asyncHandler(OrderController.showByRaffleId)
+);
+authenticatedRoutes.get(
+  "/orders/:id/mark-as-paid",
+  asyncHandler(OrderController.markAsPaidById)
+);
 
 export default authenticatedRoutes;

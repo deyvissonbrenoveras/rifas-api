@@ -78,6 +78,7 @@ class RaffleUseCase {
     raffleToUpdate.secondImageId = raffle.secondImageId;
     raffleToUpdate.thirdImageId = raffle.thirdImageId;
     raffleToUpdate.categoryId = raffle.categoryId;
+    raffleToUpdate.quotaExpirationInDays = raffle.quotaExpirationInDays;
     raffleToUpdate.save();
     return raffleToUpdate;
   }
